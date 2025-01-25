@@ -41,7 +41,7 @@ public class PlayerAnimation : MonoBehaviour
         groundCheck = transform.Find("GroundCheck").transform;
         wallCheck = transform.Find("WallCheck").transform;
 
-        groundLayer = LayerMask.GetMask("Ground Or Platform");
+        groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
         movingPlatformLayer = LayerMask.GetMask("Moving Platform");
         #endregion
