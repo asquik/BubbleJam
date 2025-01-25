@@ -30,7 +30,8 @@ public class PlayerInputController : MonoBehaviour
         
         if (move.normalized.x != 0)
         {
-            transform.localScale = new Vector3(Math.Abs(transform.localScale.x) * move.normalized.x, transform.localScale.y, transform.localScale.z);
+            var direction = move.normalized.x / Math.Abs(move.normalized.x);
+            transform.localScale = new Vector3(Math.Abs(transform.localScale.x) * direction, transform.localScale.y, transform.localScale.z);
         }
     }
 
