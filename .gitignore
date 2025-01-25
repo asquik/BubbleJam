@@ -75,3 +75,10 @@ crashlytics-build.properties
 
 # IDE Files
 .idea
+
+# Unity Sample/Demo/Tutorial Files
+/Assets/Samples
+Assets/Samples.meta
+ProjectSettings/SceneTemplateSettings.json
+
+# Miscellaneous
