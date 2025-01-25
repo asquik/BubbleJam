@@ -230,7 +230,7 @@ MonoBehaviour:
   playerMaxAcceleration: 40
   useDash: 1
   dashSpeed: 25
-  dashCooldown: 0.2
+  dashCooldown: 0.5
   dashTime: 0.1
 --- !u!114 &6041729501648012945
 MonoBehaviour:
