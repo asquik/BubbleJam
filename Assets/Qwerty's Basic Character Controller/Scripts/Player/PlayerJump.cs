@@ -226,7 +226,7 @@ public class PlayerJump : MonoBehaviour
     #region Checks
     bool GroundCheck()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || useWallJumps && Physics2D.OverlapCircle(groundCheck.position, 0.2f, wallLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, movingPlatformLayer);
+        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, wallLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, movingPlatformLayer);
     }
 
     bool WallCheck()   
