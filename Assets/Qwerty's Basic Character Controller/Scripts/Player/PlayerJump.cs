@@ -97,7 +97,6 @@ public class PlayerJump : MonoBehaviour
 
         if ((groundCheck || wallCheck)  && !wasPreviouslyGrounded)
         {
-            Debug.Log("We are in the if statement");
             jumpCount = 0;
         }
 
