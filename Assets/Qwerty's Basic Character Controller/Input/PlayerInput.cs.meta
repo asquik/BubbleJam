@@ -1,18 +1,2 @@
 fileFormatVersion: 2
 guid: d167e551f57f85b44abdfd29d614ee41
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 276300
-  packageName: Qwerty's Basic Platformer Controller
-  packageVersion: 1.0.0
-  assetPath: Assets/Qwerty's Basic Character Controller/Input/PlayerInput.cs
-  uploadId: 644331

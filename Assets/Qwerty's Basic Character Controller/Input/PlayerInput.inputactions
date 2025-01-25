@@ -27,7 +27,7 @@
                     "name": "Jump",
                     "type": "Value",
                     "id": "05d8da20-faf8-4056-8790-bfcadd1556b8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -36,7 +36,7 @@
                     "name": "Dash",
                     "type": "Value",
                     "id": "a7cedf17-767a-46c9-bf94-1b750c08bade",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -298,22 +298,22 @@
                 },
                 {
                     "name": "",
-                    "id": "456d9404-2713-49e1-ba51-93c2616a421c",
-                    "path": "<Mouse>/leftButton",
+                    "id": "c9a57460-d566-4e86-b7ec-aaaa3bd1a0e3",
+                    "path": "<Gamepad>/buttonEast",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "Gamepad",
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "c9a57460-d566-4e86-b7ec-aaaa3bd1a0e3",
-                    "path": "<Gamepad>/buttonEast",
+                    "id": "456d9404-2713-49e1-ba51-93c2616a421c",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Gamepad",
+                    "groups": "Keyboard&Mouse",
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
