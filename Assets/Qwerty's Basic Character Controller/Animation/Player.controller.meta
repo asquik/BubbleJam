@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: e34429b09cccbbc4ab3a9c01f5f78b03
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 9100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/Animation/Player.controller
+  uploadId: 644331

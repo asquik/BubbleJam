@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: c4e78175b7469fe46b596c9f0d872f28
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/Scripts/Player/PlayerJump.cs
+  uploadId: 644331

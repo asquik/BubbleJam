@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 9f0b8c77927124b459b13cd6b8c7e0eb
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/Scripts/Extra/MovingPlatformInspector.cs
+  uploadId: 644331

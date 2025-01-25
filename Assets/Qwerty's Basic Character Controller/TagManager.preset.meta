@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 6242e1fec78ae4b49bf6716be985aaad
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2655988077585873504
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/TagManager.preset
+  uploadId: 644331

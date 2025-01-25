@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: c0b595034f694074485b450aa62ce38b
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/Animation/Idle.anim
+  uploadId: 644331

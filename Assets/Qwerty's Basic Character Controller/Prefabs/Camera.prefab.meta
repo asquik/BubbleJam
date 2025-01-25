@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: dec0aa1ae6c13f24f943978c000066b4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/Prefabs/Camera.prefab
+  uploadId: 644331

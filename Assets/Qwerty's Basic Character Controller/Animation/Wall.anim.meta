@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 22cbb535baed78e4c9c2f11af2fc020f
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 7400000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/Animation/Wall.anim
+  uploadId: 644331

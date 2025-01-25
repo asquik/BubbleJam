@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 03b0cfc3af2900e4bac1da0f72154193
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/Scripts/Player/PlayerAnimation.cs
+  uploadId: 644331

@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+guid: b0661f0e201cf054fb53aa1c1d943da4
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 276300
+  packageName: Qwerty's Basic Platformer Controller
+  packageVersion: 1.0.0
+  assetPath: Assets/Qwerty's Basic Character Controller/Prefabs/Moving Platform.prefab
+  uploadId: 644331
