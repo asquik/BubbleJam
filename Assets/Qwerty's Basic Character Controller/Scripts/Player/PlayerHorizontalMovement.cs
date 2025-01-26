@@ -105,6 +105,14 @@ public class PlayerHorizontalMovement : MonoBehaviour
     {
         return isDashing;
     }
+
+    public void SetNewDashData(DashData dashData)
+    {
+        useDash = dashData.useDash;
+        dashSpeed = dashData.dashSpeed;
+        dashCooldown = dashData.dashCooldown;
+        dashTime = dashData.dashTime;
+}
     #endregion
 
 }
