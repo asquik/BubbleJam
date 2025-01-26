@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      character_full_woman_nolegs_0: 4559930271469680365
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      PotentialCover_chaotic_0: 5136644867165961224
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

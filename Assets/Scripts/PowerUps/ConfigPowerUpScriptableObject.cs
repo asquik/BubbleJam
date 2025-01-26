@@ -2,7 +2,7 @@ using UnityEngine;
 
 public abstract class PowerUpScriptableObject : ScriptableObject
 {
-    [SerializeField] public Color powerUpColor;
+    [SerializeField] public Sprite sprite;
     public abstract void Apply(GameObject player);
 }
 

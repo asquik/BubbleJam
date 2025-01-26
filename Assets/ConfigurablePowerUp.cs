@@ -7,7 +7,7 @@ public class ConfigurablePowerUp : MonoBehaviour
     public void Start()
     {
         var sRenderer = GetComponent<SpriteRenderer>();
-        sRenderer.color = data.powerUpColor;
+        sRenderer.sprite = data.sprite;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

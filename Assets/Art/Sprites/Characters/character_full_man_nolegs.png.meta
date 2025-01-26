@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      character_full_man_nolegs_0: 1610584507901828755
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

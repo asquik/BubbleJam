@@ -147,7 +147,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      border_checkerboard_0: -7797852828606439154
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
