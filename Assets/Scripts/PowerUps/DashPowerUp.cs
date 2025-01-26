@@ -27,12 +27,12 @@ public class DashPowerUp : ActionPowerUpScriptableObject
         canDash = true;
     }
 
-    public override InputAction getInputBinding(PlayerInput input)
+    public override InputAction GetInputBinding(PlayerInput input)
     {
         return input.Player.Dash;
     }
 
-    public override IEnumerator activateAbility(PlayerAbilityActivator activator, Transform transform, Rigidbody2D rb)
+    public override IEnumerator ActivateAbility(PlayerAbilityActivator activator, Transform transform, Rigidbody2D rb)
     {
         return Dash(activator, transform, rb);
     }

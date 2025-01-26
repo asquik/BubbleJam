@@ -233,7 +233,7 @@ public class PlayerJump : MonoBehaviour
     #endregion
     
     #region Modifiers
-    public void resetModifiers()
+    public void ResetModifiers()
     {
         maxAirJumpsModifier = 0;
         gravityModifier = 1;

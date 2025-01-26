@@ -53,25 +53,25 @@ public class PlayerAbilityActivator : MonoBehaviour
                 {
                         case ActionPowerUpScriptableObject currActionPowerUp:
                                 // Clean up input event handling
-                                currActionPowerUp.getInputBinding(input).started -= activationCallback;
-                                currActionPowerUp.getInputBinding(input).canceled -= deactivationCallback;
+                                currActionPowerUp.GetInputBinding(input).started -= activationCallback;
+                                currActionPowerUp.GetInputBinding(input).canceled -= deactivationCallback;
                                 break;
                         case ModifierPowerUpScriptableObject:
                                 // Reset the modifiers in all applicable input handling scripts
-                                playerJumpScript.resetModifiers();
+                                playerJumpScript.ResetModifiers();
                                 break;
                 }
 
                 switch (newPowerUp)
                 {
                         case ActionPowerUpScriptableObject actionPowerUp:
-                                var binding = actionPowerUp.getInputBinding(input);
+                                var binding = actionPowerUp.GetInputBinding(input);
                                 
                                 // New subscription
-                                activationCallback = ctx => { StartCoroutine(actionPowerUp.activateAbility(this, transform, rb)); };
+                                activationCallback = ctx => { StartCoroutine(actionPowerUp.ActivateAbility(this, transform, rb)); };
                                 binding.started += activationCallback;
                         
-                                deactivationCallback = ctx => actionPowerUp.deactivateAbility(gameObject);
+                                deactivationCallback = ctx => actionPowerUp.DeactivateAbility(gameObject);
                                 binding.canceled += deactivationCallback;
                                 break;
                         case ModifierPowerUpScriptableObject modifierPowerUp:
