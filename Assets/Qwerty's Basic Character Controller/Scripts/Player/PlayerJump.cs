@@ -232,5 +232,10 @@ public class PlayerJump : MonoBehaviour
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.4f, wallLayer);
     }
+    public void SetNewDoubleJumpData(DoubleJumpData doubleJumpData)
+    {
+        maxAirJumps = doubleJumpData.maxAirJumps;
+        useAirJumps = doubleJumpData.useAirJumps;
+    }
     #endregion
 }
