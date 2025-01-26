@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddacae71c27c52449bc0af900117543f, type: 3}
   m_Name: DoubleJumpPowerUp
   m_EditorClassIdentifier: 
+  powerUpColor: {r: 0.078704715, g: 1, b: 0, a: 1}
   data:
     useAirJumps: 1
     maxAirJumps: 1

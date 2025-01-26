@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e0a47611fa88542aac370c7d204b77, type: 3}
   m_Name: DashPowerUp
   m_EditorClassIdentifier: 
+  powerUpColor: {r: 1, g: 0, b: 0, a: 1}
   data:
     useDash: 1
     dashSpeed: 25
