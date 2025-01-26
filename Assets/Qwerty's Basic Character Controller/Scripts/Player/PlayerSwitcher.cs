@@ -2,22 +2,32 @@ using UnityEngine;
 
 public class PlayerSwitcher : MonoBehaviour
 {
-    // public CameraScript camera;
-    [SerializeField] private PlayerControllerV2 player1Controls;
-    [SerializeField] private PlayerControllerV2 player2Controls;
+    private CameraScript cameraScript;
+    [SerializeField] private PlayerController player1Controls;
+    [SerializeField] private PlayerController player2Controls;
     
     private GlobalPlayerInput input;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        var cameraScript = FindFirstObjectByType<CameraScript>();
-        Debug.Log("Camera: " + cameraScript);
-
+        cameraScript = FindFirstObjectByType<CameraScript>();
+        
+        input = new GlobalPlayerInput();
         input.Player.SwitchPlayer.performed += ctx => SwitchPlayer();
     }
     
-    void Start()
+    private void OnEnable()
+    {
+        input.Enable();
+    }
+
+    private void OnDisable()
+    {
+        input.Disable();
+    }
+    
+    private void Start()
     {
         player2Controls.enabled = false;
     }
@@ -28,11 +38,13 @@ public class PlayerSwitcher : MonoBehaviour
         {
             player1Controls.IsEnabled = false;
             player2Controls.IsEnabled = true;
+            cameraScript.player = player2Controls.gameObject;
         }
         else
         {
             player1Controls.IsEnabled = true;
             player2Controls.IsEnabled = false;
+            cameraScript.player = player1Controls.gameObject;
         }
     }
 }

@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-
-    [SerializeField] private GameObject player;
+    [SerializeField] public GameObject player;
 
     void Update()
     {
