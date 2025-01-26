@@ -858,7 +858,7 @@ GameObject:
   - component: {fileID: 913618083}
   - component: {fileID: 913618082}
   m_Layer: 0
-  m_Name: Circle (1)
+  m_Name: DoubleJumpPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1649,7 +1649,7 @@ GameObject:
   - component: {fileID: 1351426804}
   - component: {fileID: 1351426803}
   m_Layer: 0
-  m_Name: Circle
+  m_Name: DashPowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2053,7 +2053,7 @@ GameObject:
   - component: {fileID: 1508099195}
   - component: {fileID: 1508099194}
   m_Layer: 0
-  m_Name: Circle (2)
+  m_Name: GlidePowerUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
