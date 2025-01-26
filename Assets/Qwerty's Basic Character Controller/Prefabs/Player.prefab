@@ -18,7 +18,7 @@ GameObject:
   - component: {fileID: 6041729501648012945}
   - component: {fileID: 3493602092277174987}
   - component: {fileID: 5131534483401246677}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -244,7 +244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4e78175b7469fe46b596c9f0d872f28, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpHeight: 14
+  jumpHeight: 16
   jumpMultiplier: 3
   fallMultiplier: 4
   maxFallSpeed: 10
@@ -296,7 +296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8234610659612000310}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3645557376644450667}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
