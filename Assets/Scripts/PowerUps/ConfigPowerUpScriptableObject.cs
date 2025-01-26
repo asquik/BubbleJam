@@ -9,7 +9,7 @@ public abstract class PowerUpScriptableObject : ScriptableObject
 
 public abstract class ActionPowerUpScriptableObject : PowerUpScriptableObject
 {
-    public abstract InputAction GetInputBinding(ActionInput input);
+    public abstract InputAction GetInputBinding(PlayerActionInput input);
 
     public abstract IEnumerator ActivateAbility(PlayerAbilityActivator activator, Transform transform, Rigidbody2D rb);
 

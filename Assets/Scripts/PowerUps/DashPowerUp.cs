@@ -27,7 +27,7 @@ public class DashPowerUp : ActionPowerUpScriptableObject
         canDash = true;
     }
 
-    public override InputAction GetInputBinding(ActionInput input)
+    public override InputAction GetInputBinding(PlayerActionInput input)
     {
         return input.Player.Dash;
     }
