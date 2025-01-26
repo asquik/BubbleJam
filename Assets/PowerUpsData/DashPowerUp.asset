@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: DashPowerUp
   m_EditorClassIdentifier: 
   powerUpColor: {r: 1, g: 0, b: 0, a: 1}
-  data:
-    useDash: 1
-    dashSpeed: 25
-    dashCooldown: 0.5
-    dashTime: 0.1
+  dashSpeed: 25
+  dashCooldown: 0.5
+  dashTime: 0.1

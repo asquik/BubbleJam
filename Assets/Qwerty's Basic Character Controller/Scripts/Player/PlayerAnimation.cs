@@ -1,6 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,7 +6,7 @@ public class PlayerAnimation : MonoBehaviour
     #region Variables
     private Rigidbody2D rb;
     private Animator animator;
-    private PlayerHorizontalMovement horizontalMovementScript;
+    private PlayerAbilityActivator abilityActivatorScript;
     private SpriteRenderer spriteRenderer;
 
     [SerializeField] bool useIdleAnimation;
@@ -35,7 +32,7 @@ public class PlayerAnimation : MonoBehaviour
         #region Variables
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        horizontalMovementScript = GetComponent<PlayerHorizontalMovement>();
+        abilityActivatorScript = GetComponent<PlayerAbilityActivator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
 
         groundCheck = transform.Find("GroundCheck").transform;
@@ -135,15 +132,7 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Dashing()
     {
-
-        if (horizontalMovementScript.GetIsDashing())
-        {
-            animator.SetBool("isDashing", true);
-        }
-        else
-        {
-            animator.SetBool("isDashing", false);
-        }
+        animator.SetBool("isDashing", abilityActivatorScript.GetStatusOrElse("isDashing", false));
     }
 
     private void WallSlide()

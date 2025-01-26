@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: DoubleJumpPowerUp
   m_EditorClassIdentifier: 
   powerUpColor: {r: 0.078704715, g: 1, b: 0, a: 1}
-  data:
-    useAirJumps: 1
-    maxAirJumps: 1
+  maxAirJumps: 1
