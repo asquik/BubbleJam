@@ -112,7 +112,6 @@ public class PlayerHorizontalMovement : MonoBehaviour
         dashSpeed = dashData.dashSpeed;
         dashCooldown = dashData.dashCooldown;
         dashTime = dashData.dashTime;
-}
+    }
     #endregion
-
 }
