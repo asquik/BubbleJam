@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22ff30e69ed57924089d90d5a0ec7299, type: 3}
   m_Name: GlidePowerUp
   m_EditorClassIdentifier: 
-  powerUpColor: {r: 0, g: 0.24642372, b: 1, a: 1}
+  sprite: {fileID: -4823963884278739640, guid: 590268a3974a46c48ab8cfbe7c8e54f0, type: 3}
   glideGravity: 0.1
