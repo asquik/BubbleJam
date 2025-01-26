@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -47,7 +48,7 @@ public class PlayerJump : MonoBehaviour
     // Properties that are affected by power ups
     [Header("-----Modifier Properties-----")]
     [SerializeField] public int maxAirJumpsModifier;
-    [SerializeField] public int gravityModifier;
+    [SerializeField] public float glideModifier;
 
     #region Initialization
     private void Awake()
@@ -110,18 +111,18 @@ public class PlayerJump : MonoBehaviour
         
         if (!abilityActivatorScript.GetStatusOrElse("isDashing", false))
         {
-            // TODO: Review if this is where we want to apply "gravityModifier"
+            // TODO: Review if this is where we want to apply "glideModifier"
             if (rb.linearVelocity.y > 0)
             {
-                rb.gravityScale = jumpMultiplier * gravityModifier;
+                rb.gravityScale = jumpMultiplier;
             }
-            else if (rb.linearVelocity.y < 0 && rb.linearVelocity.y > -maxFallSpeed)
+            else if (rb.linearVelocity.y < 0 && rb.linearVelocity.y > -maxFallSpeed * glideModifier)
             {
-                rb.gravityScale = fallMultiplier * gravityModifier;
+                rb.gravityScale = glideModifier != 1f ? glideModifier : fallMultiplier;
             }
             else if (rb.linearVelocity.y == 0)
             {
-                rb.gravityScale = gravityScale * gravityModifier;
+                rb.gravityScale = gravityScale;
             }
         }
         
@@ -236,7 +237,7 @@ public class PlayerJump : MonoBehaviour
     public void ResetModifiers()
     {
         maxAirJumpsModifier = 0;
-        gravityModifier = 1;
+        glideModifier = 1f;
     }
     #endregion
 }

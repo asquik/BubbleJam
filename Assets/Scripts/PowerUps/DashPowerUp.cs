@@ -36,4 +36,10 @@ public class DashPowerUp : ActionPowerUpScriptableObject
     {
         return Dash(activator, transform, rb);
     }
+
+    public override void DeactivateAbility(GameObject player)
+    {
+        // Do nothing (When "DeactivateAbility" was
+        //  virtual, it just wouldn't get called at all)
+    }
 }

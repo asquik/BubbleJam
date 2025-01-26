@@ -13,8 +13,9 @@ public abstract class ActionPowerUpScriptableObject : PowerUpScriptableObject
 
     public abstract IEnumerator ActivateAbility(PlayerAbilityActivator activator, Transform transform, Rigidbody2D rb);
 
-    // Optional (Not all abilities need this to be implemented) | Will be used for the glide ability
-    public void DeactivateAbility(GameObject player) { }
+    // Optional (Not all abilities need this to be implemented)
+    // For some reason when it was "virtual", the callback just wouldn't get called at all.
+    public abstract void DeactivateAbility(GameObject player);
 }
 
 public abstract class ModifierPowerUpScriptableObject : PowerUpScriptableObject
