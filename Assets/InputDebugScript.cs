@@ -5,7 +5,7 @@ public class InputDebugScript : MonoBehaviour
 {
     PlayerInput input;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         var input = new PlayerInput();
         var smth = input.Player.Get();
@@ -21,7 +21,4 @@ public class InputDebugScript : MonoBehaviour
     {
         input.Disable();
     }
-
-
-
 }
