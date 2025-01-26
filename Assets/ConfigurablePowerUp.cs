@@ -15,6 +15,7 @@ public class ConfigurablePowerUp : MonoBehaviour
         var activator = other.gameObject.GetComponent<PlayerAbilityActivator>();
         activator.ApplyAbility(data);
         
-        GameObject.Destroy(gameObject);
+        // TBD how what the happy path will be
+        // GameObject.Destroy(gameObject);
     }
 }

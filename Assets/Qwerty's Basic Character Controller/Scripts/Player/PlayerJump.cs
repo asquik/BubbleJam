@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,17 +13,12 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.3f;
     [SerializeField] private float jumpBufferTime = 0.2f;
 
-    [SerializeField] private bool useAirJumps;
-    [SerializeField] private int maxAirJumps;
-
-
     [Header("-----Wall Jump/Wall Slide-----")]
     [SerializeField] bool useWallJumps;
     [SerializeField] bool useWallSlide;
     [SerializeField] float wallSlideSpeed;
     [SerializeField] private float wallJumpBufferTime = 0.2f;
     [SerializeField] private Vector2 wallJumpSpeed;
-
 
     private bool isWallSliding;
     private bool wasPreviouslyGrounded = false;
@@ -48,8 +41,13 @@ public class PlayerJump : MonoBehaviour
     private Transform groundCheck;
     private Transform wallCheck;
     private Rigidbody2D rb;
-    private PlayerHorizontalMovement horizontalMovementScript;
+    private PlayerAbilityActivator abilityActivatorScript;
     #endregion
+    
+    // Properties that are affected by power ups
+    [Header("-----Modifier Properties-----")]
+    [SerializeField] public int maxAirJumpsModifier;
+    [SerializeField] public int gravityModifier;
 
     #region Initialization
     private void Awake()
@@ -76,7 +74,7 @@ public class PlayerJump : MonoBehaviour
 
         groundCheck = transform.Find("GroundCheck").transform;
         wallCheck = transform.Find("WallCheck").transform;
-        horizontalMovementScript = GetComponent<PlayerHorizontalMovement>();
+        abilityActivatorScript = GetComponent<PlayerAbilityActivator>();
 
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
@@ -88,7 +86,6 @@ public class PlayerJump : MonoBehaviour
 
     void Update()
     {
-
         #region Jump
         jumpBufferCounter -= Time.deltaTime;
 
@@ -110,20 +107,21 @@ public class PlayerJump : MonoBehaviour
         {
             coyoteCounter -= Time.deltaTime;
         }
-
-        if (!horizontalMovementScript.GetIsDashing())
+        
+        if (!abilityActivatorScript.GetStatusOrElse("isDashing", false))
         {
+            // TODO: Review if this is where we want to apply "gravityModifier"
             if (rb.linearVelocity.y > 0)
             {
-                rb.gravityScale = jumpMultiplier;
+                rb.gravityScale = jumpMultiplier * gravityModifier;
             }
             else if (rb.linearVelocity.y < 0 && rb.linearVelocity.y > -maxFallSpeed)
             {
-                rb.gravityScale = fallMultiplier;
+                rb.gravityScale = fallMultiplier * gravityModifier;
             }
             else if (rb.linearVelocity.y == 0)
             {
-                rb.gravityScale = gravityScale;
+                rb.gravityScale = gravityScale * gravityModifier;
             }
         }
         
@@ -152,7 +150,7 @@ public class PlayerJump : MonoBehaviour
 
         jumpBufferCounter = jumpBufferTime;
 
-        if (jumpCount <= maxAirJumps && useAirJumps && !WallCheck())
+        if (jumpCount <= maxAirJumpsModifier && !WallCheck())
         {
 
             ExecuteJump();
@@ -228,14 +226,17 @@ public class PlayerJump : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, wallLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, movingPlatformLayer);
     }
 
-    bool WallCheck()   
+    bool WallCheck()
     {
         return Physics2D.OverlapCircle(wallCheck.position, 0.4f, wallLayer);
     }
-    public void SetNewDoubleJumpData(DoubleJumpData doubleJumpData)
+    #endregion
+    
+    #region Modifiers
+    public void resetModifiers()
     {
-        maxAirJumps = doubleJumpData.maxAirJumps;
-        useAirJumps = doubleJumpData.useAirJumps;
+        maxAirJumpsModifier = 0;
+        gravityModifier = 1;
     }
     #endregion
 }

@@ -5,19 +5,19 @@ using UnityEngine.InputSystem;
 public abstract class PowerUpScriptableObject : ScriptableObject
 {
     [SerializeField] public Color powerUpColor;
-    
-    public abstract InputAction getInputBinding(PlayerInput input);
-    
-    public abstract IEnumerator activateAbility(Transform transform, Rigidbody2D rb);
-    
-    // Subscribe to ability
-    // public abstract void Apply(GameObject player);
-    // Unsubscribe to ability
-    // public abstract void Remove(GameObject player);
 }
 
-public abstract class ConfigPowerUpScriptableObject<TData> : PowerUpScriptableObject
-    where TData : new()
+public abstract class ActionPowerUpScriptableObject : PowerUpScriptableObject
 {
-    [SerializeField] protected TData data;
+    public abstract InputAction getInputBinding(PlayerInput input);
+
+    public abstract IEnumerator activateAbility(PlayerAbilityActivator activator, Transform transform, Rigidbody2D rb);
+
+    // Optional (Not all abilities need this to be implemented) | Will be used for the glide ability
+    public void deactivateAbility(GameObject player) { }
+}
+
+public abstract class ModifierPowerUpScriptableObject : PowerUpScriptableObject
+{
+    public abstract void Apply(GameObject player);
 }
