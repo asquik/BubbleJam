@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class PlayerAbilityActivator : MonoBehaviour
 {
         private Rigidbody2D rb;
-        PlayerInput input;
+        InputActionAsset input;
         
         private PowerUpScriptableObject powerUp;
         
@@ -15,13 +15,22 @@ public class PlayerAbilityActivator : MonoBehaviour
 
         private Dictionary<string, bool> statuses;
         
-        private PlayerJump playerJumpScript;
+        // private PlayerJump playerJumpScript;
 
+        public void Initialize(PlayerInput playerInput)
+        {
+                foreach (var actionsBinding in playerInput.actions.bindings)
+                {
+                        Debug.Log("Action: " + actionsBinding.action + " | " + "Name: " + actionsBinding.name);
+                }
+        }
+        
         public void Awake()
         {
-                input = new PlayerInput();
+                var playerInput = GetComponent<PlayerInput>();
+                Initialize(playerInput);
                 rb = GetComponent<Rigidbody2D>();
-                playerJumpScript = GetComponent<PlayerJump>();
+                // playerJumpScript = GetComponent<PlayerJump>();
 
                 statuses = new Dictionary<string, bool>();
         }
@@ -49,37 +58,37 @@ public class PlayerAbilityActivator : MonoBehaviour
 
         public void ApplyAbility(PowerUpScriptableObject newPowerUp)
         {
-                switch (powerUp)
-                {
-                        case ActionPowerUpScriptableObject currActionPowerUp:
-                                // Clean up input event handling
-                                currActionPowerUp.GetInputBinding(input).started -= activationCallback;
-                                currActionPowerUp.GetInputBinding(input).canceled -= deactivationCallback;
-                                break;
-                        case ModifierPowerUpScriptableObject:
-                                // Reset the modifiers in all applicable input handling scripts
-                                playerJumpScript.ResetModifiers();
-                                break;
-                }
-
-                switch (newPowerUp)
-                {
-                        case ActionPowerUpScriptableObject actionPowerUp:
-                                var binding = actionPowerUp.GetInputBinding(input);
-                                
-                                // New subscription
-                                activationCallback = ctx => { StartCoroutine(actionPowerUp.ActivateAbility(this, transform, rb)); };
-                                binding.started += activationCallback;
-                        
-                                deactivationCallback = ctx => actionPowerUp.DeactivateAbility(gameObject);
-                                binding.canceled += deactivationCallback;
-                                break;
-                        case ModifierPowerUpScriptableObject modifierPowerUp:
-                                modifierPowerUp.Apply(gameObject);
-                                break;
-                }
-                
-                // Keep for next clean up
-                powerUp = newPowerUp;
+                // switch (powerUp)
+                // {
+                //         case ActionPowerUpScriptableObject currActionPowerUp:
+                //                 // Clean up input event handling
+                //                 currActionPowerUp.GetInputBinding(input).started -= activationCallback;
+                //                 currActionPowerUp.GetInputBinding(input).canceled -= deactivationCallback;
+                //                 break;
+                //         case ModifierPowerUpScriptableObject:
+                //                 // Reset the modifiers in all applicable input handling scripts
+                //                 playerJumpScript.ResetModifiers();
+                //                 break;
+                // }
+                //
+                // switch (newPowerUp)
+                // {
+                //         case ActionPowerUpScriptableObject actionPowerUp:
+                //                 var binding = actionPowerUp.GetInputBinding(input);
+                //                 
+                //                 // New subscription
+                //                 activationCallback = ctx => { StartCoroutine(actionPowerUp.ActivateAbility(this, transform, rb)); };
+                //                 binding.started += activationCallback;
+                //         
+                //                 deactivationCallback = ctx => actionPowerUp.DeactivateAbility(gameObject);
+                //                 binding.canceled += deactivationCallback;
+                //                 break;
+                //         case ModifierPowerUpScriptableObject modifierPowerUp:
+                //                 modifierPowerUp.Apply(gameObject);
+                //                 break;
+                // }
+                //
+                // // Keep for next clean up
+                // powerUp = newPowerUp;
         }
 }

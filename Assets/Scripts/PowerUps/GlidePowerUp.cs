@@ -9,7 +9,7 @@ public class GlidePowerUp : ActionPowerUpScriptableObject
     [SerializeField] private float glideGravity;
     private bool isGliding;
 
-    public override InputAction GetInputBinding(PlayerInput input)
+    public override InputAction GetInputBinding(ActionInput input)
     {
         return input.Player.Jump;
     }

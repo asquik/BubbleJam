@@ -12,17 +12,12 @@ public class PlayerHorizontalMovement : MonoBehaviour
     private float movingPlatformSpeed;
 
     private Rigidbody2D rb;
-    PlayerInput input;
+    
     #endregion
 
     private void Awake()
     {
-        input = new PlayerInput();
         rb = GetComponent<Rigidbody2D>();
-    }
-    private void OnEnable()
-    {
-        input.Enable();
     }
 
     private void Update()
