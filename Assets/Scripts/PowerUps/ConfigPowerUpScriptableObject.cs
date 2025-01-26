@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 public abstract class PowerUpScriptableObject : ScriptableObject
 {
     [SerializeField] public Sprite sprite;
-    public abstract void Apply(GameObject player);
 }
 
 public abstract class ActionPowerUpScriptableObject : PowerUpScriptableObject
