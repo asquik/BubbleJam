@@ -1,13 +1,12 @@
 using UnityEngine;
-using UnityEngine.Windows;
 
 public class InputDebugScript : MonoBehaviour
 {
-    PlayerInput input;
+    PlayerActionInput input;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
-        var input = new PlayerInput();
+        var input = new PlayerActionInput();
         var smth = input.Player.Get();
         smth.actionTriggered += (x) => Debug.Log(x);
     }

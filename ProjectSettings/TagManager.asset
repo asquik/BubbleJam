@@ -8,6 +8,7 @@ TagManager:
   - MovingPlatform
   - Ground
   - Wall
+  - PlayerCamera
   layers:
   - Default
   - TransparentFX

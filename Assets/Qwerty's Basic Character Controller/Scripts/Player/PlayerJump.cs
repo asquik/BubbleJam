@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -15,17 +14,12 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] private float coyoteTime = 0.3f;
     [SerializeField] private float jumpBufferTime = 0.2f;
 
-    [SerializeField] private bool useAirJumps;
-    [SerializeField] private int maxAirJumps;
-
-
     [Header("-----Wall Jump/Wall Slide-----")]
     [SerializeField] bool useWallJumps;
     [SerializeField] bool useWallSlide;
     [SerializeField] float wallSlideSpeed;
     [SerializeField] private float wallJumpBufferTime = 0.2f;
     [SerializeField] private Vector2 wallJumpSpeed;
-
 
     private bool isWallSliding;
     private bool wasPreviouslyGrounded = false;
@@ -40,55 +34,39 @@ public class PlayerJump : MonoBehaviour
     #endregion
 
     #region Other Variables
-    PlayerInput input;
-
     private LayerMask groundLayer;
     private LayerMask wallLayer;
     private LayerMask movingPlatformLayer;
-    private Transform groundCheck;
-    private Transform wallCheck;
+    private Transform groundTransform;
+    private Transform wallTransform;
     private Rigidbody2D rb;
-    private PlayerHorizontalMovement horizontalMovementScript;
+    private PlayerAbilityActivator abilityActivatorScript;
     #endregion
+    
+    // Properties that are affected by power ups
+    [Header("-----Modifier Properties-----")]
+    [SerializeField] public int maxAirJumpsModifier;
+    [SerializeField] public float glideModifier;
 
     #region Initialization
-    private void Awake()
-    {
-        input = new PlayerInput();
-        input.Player.Jump.started += ctx => PressJump(ctx);
-        input.Player.Jump.canceled += ctx => ReleasedJump(ctx);
 
-    }
-    private void OnEnable()
-    {
-        input.Enable();
-    }
-
-    private void OnDisable()
-    {
-        input.Disable();
-    }
-
-
-    void Start()
+    public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        groundCheck = transform.Find("GroundCheck").transform;
-        wallCheck = transform.Find("WallCheck").transform;
-        horizontalMovementScript = GetComponent<PlayerHorizontalMovement>();
+        groundTransform = transform.Find("GroundCheck").transform;
+        wallTransform = transform.Find("WallCheck").transform;
+        abilityActivatorScript = GetComponent<PlayerAbilityActivator>();
 
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
         movingPlatformLayer = LayerMask.GetMask("Moving Platform");
-
     }
     #endregion
 
 
     void Update()
     {
-
         #region Jump
         jumpBufferCounter -= Time.deltaTime;
 
@@ -110,16 +88,17 @@ public class PlayerJump : MonoBehaviour
         {
             coyoteCounter -= Time.deltaTime;
         }
-
-        if (!horizontalMovementScript.GetIsDashing())
+        
+        if (!abilityActivatorScript.GetStatusOrElse("isDashing", false))
         {
+            // TODO: Review if this is where we want to apply "glideModifier"
             if (rb.linearVelocity.y > 0)
             {
                 rb.gravityScale = jumpMultiplier;
             }
-            else if (rb.linearVelocity.y < 0 && rb.linearVelocity.y > -maxFallSpeed)
+            else if (rb.linearVelocity.y < 0 && rb.linearVelocity.y > -maxFallSpeed * glideModifier)
             {
-                rb.gravityScale = fallMultiplier;
+                rb.gravityScale = glideModifier != 1f ? glideModifier : fallMultiplier;
             }
             else if (rb.linearVelocity.y == 0)
             {
@@ -127,7 +106,6 @@ public class PlayerJump : MonoBehaviour
             }
         }
         
-
         #endregion
 
         if (useWallJumps)
@@ -146,13 +124,24 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    #region Jump Methods
-    void PressJump(InputAction.CallbackContext ctx)
+    void OnJump(InputValue input)
     {
+        if (input.isPressed)
+        {
+            PressJump();
+        }
+        else
+        {
+            ReleasedJump();
+        }
+    }
 
+    #region Jump Methods
+    void PressJump()
+    {
         jumpBufferCounter = jumpBufferTime;
 
-        if (jumpCount <= maxAirJumps && useAirJumps && !WallCheck())
+        if (jumpCount <= maxAirJumpsModifier && !WallCheck())
         {
 
             ExecuteJump();
@@ -167,7 +156,7 @@ public class PlayerJump : MonoBehaviour
     }
 
 
-    void ReleasedJump(InputAction.CallbackContext ctx)
+    void ReleasedJump()
     {
         if (rb.linearVelocity.y > 0f)
         {
@@ -225,17 +214,20 @@ public class PlayerJump : MonoBehaviour
     #region Checks
     bool GroundCheck()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, wallLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, movingPlatformLayer);
+        return Physics2D.OverlapCircle(groundTransform.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundTransform.position, 0.2f, wallLayer) || Physics2D.OverlapCircle(groundTransform.position, 0.2f, movingPlatformLayer);
     }
 
-    bool WallCheck()   
+    bool WallCheck()
     {
-        return Physics2D.OverlapCircle(wallCheck.position, 0.4f, wallLayer);
+        return Physics2D.OverlapCircle(wallTransform.position, 0.4f, wallLayer);
     }
-    public void SetNewDoubleJumpData(DoubleJumpData doubleJumpData)
+    #endregion
+    
+    #region Modifiers
+    public void ResetModifiers()
     {
-        maxAirJumps = doubleJumpData.maxAirJumps;
-        useAirJumps = doubleJumpData.useAirJumps;
+        maxAirJumpsModifier = 0;
+        glideModifier = 1f;
     }
     #endregion
 }

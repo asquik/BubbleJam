@@ -1,21 +1,45 @@
 using UnityEngine;
-using System;
+using System.Collections;
+using UnityEngine.InputSystem;
 
 [CreateAssetMenu(fileName = "DashPowerUp", menuName = "Scriptable Objects/DashPowerUp")]
-public class DashPowerUp : ConfigPowerUpScriptableObject<DashData>
+public class DashPowerUp : ActionPowerUpScriptableObject
 {
-    public override void Apply(GameObject player)
+    [Header("-----Dash-----")]
+    [SerializeField] private float dashSpeed;
+    [SerializeField] private float dashCooldown;
+    [SerializeField] private float dashTime;
+    private bool canDash = true;
+    
+    private IEnumerator Dash(PlayerAbilityActivator activator, Transform transform, Rigidbody2D rb)
     {
-        var dashComp = player.GetComponent<PlayerHorizontalMovement>();
-        dashComp.SetNewDashData(data);
+        if (!canDash) yield break;
+        
+        canDash = false;
+        activator.SetStatus("isDashing", true);
+        float originalGravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        rb.linearVelocity = new Vector2(rb.linearVelocity.x + Mathf.Sign(transform.localScale.x) * dashSpeed, 0f);
+        yield return new WaitForSeconds(dashTime);
+        rb.gravityScale = originalGravity;
+        activator.SetStatus("isDashing", false);
+        yield return new WaitForSeconds(dashCooldown);
+        canDash = true;
     }
-}
 
-[Serializable]
-public class DashData
-{
-    public bool useDash;
-    public float dashSpeed;
-    public float dashCooldown;
-    public float dashTime;
+    public override InputAction GetInputBinding(PlayerActionInput input)
+    {
+        return input.Player.Dash;
+    }
+
+    public override IEnumerator ActivateAbility(PlayerAbilityActivator activator, Transform transform, Rigidbody2D rb)
+    {
+        return Dash(activator, transform, rb);
+    }
+
+    public override void DeactivateAbility(GameObject player)
+    {
+        // Do nothing (When "DeactivateAbility" was
+        //  virtual, it just wouldn't get called at all)
+    }
 }

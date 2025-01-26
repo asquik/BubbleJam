@@ -12,7 +12,10 @@ public class ConfigurablePowerUp : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        data.Apply(other.gameObject);
-        GameObject.Destroy(gameObject);
+        var activator = other.gameObject.GetComponent<PlayerAbilityActivator>();
+        activator.ApplyAbility(data);
+        
+        // TBD how what the happy path will be
+        // GameObject.Destroy(gameObject);
     }
 }
