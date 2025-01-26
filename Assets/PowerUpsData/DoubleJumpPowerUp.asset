@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: DoubleJumpPowerUp
   m_EditorClassIdentifier: 
   sprite: {fileID: -3050129961116833247, guid: c669c1d4ceebccb4b969a88c40406742, type: 3}
-  data:
-    useAirJumps: 1
-    maxAirJumps: 1
+  maxAirJumps: 1

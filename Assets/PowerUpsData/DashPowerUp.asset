@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: DashPowerUp
   m_EditorClassIdentifier: 
   sprite: {fileID: 7183722008854468420, guid: 9dd9f53932c96e2419ab6203d640c355, type: 3}
-  data:
-    useDash: 1
-    dashSpeed: 25
-    dashCooldown: 0.5
-    dashTime: 0.1
+  dashSpeed: 25
+  dashCooldown: 0.5
+  dashTime: 0.1
