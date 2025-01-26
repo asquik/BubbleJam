@@ -2,7 +2,7 @@ using UnityEngine;
 using System;
 
 [CreateAssetMenu(fileName = "DashPowerUp", menuName = "Scriptable Objects/DashPowerUp")]
-public class DashPowerUp : ConfigPowerUp<DashData>
+public class DashPowerUp : ConfigPowerUpScriptableObject<DashData>
 {
     public override void Apply(GameObject player)
     {
