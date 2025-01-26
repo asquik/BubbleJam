@@ -16,6 +16,6 @@ ScriptedImporter:
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 8404be70184654265930450def6a9037, type: 3}
   generateWrapperCode: 1
-  wrapperCodePath: Assets/Qwerty's Basic Character Controller/Input/PlayerInput.cs
+  wrapperCodePath: Assets/Qwerty's Basic Character Controller/Input/PlayerActionInput.cs
   wrapperClassName: 
   wrapperCodeNamespace: 

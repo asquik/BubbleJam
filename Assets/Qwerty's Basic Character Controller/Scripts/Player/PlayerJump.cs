@@ -34,13 +34,11 @@ public class PlayerJump : MonoBehaviour
     #endregion
 
     #region Other Variables
-    PlayerInput input;
-
     private LayerMask groundLayer;
     private LayerMask wallLayer;
     private LayerMask movingPlatformLayer;
-    private Transform groundCheck;
-    private Transform wallCheck;
+    private Transform groundTransform;
+    private Transform wallTransform;
     private Rigidbody2D rb;
     private PlayerAbilityActivator abilityActivatorScript;
     #endregion
@@ -51,36 +49,18 @@ public class PlayerJump : MonoBehaviour
     [SerializeField] public float glideModifier;
 
     #region Initialization
-    private void Awake()
-    {
-        input = new PlayerInput();
-        input.Player.Jump.started += ctx => PressJump(ctx);
-        input.Player.Jump.canceled += ctx => ReleasedJump(ctx);
 
-    }
-    private void OnEnable()
-    {
-        input.Enable();
-    }
-
-    private void OnDisable()
-    {
-        input.Disable();
-    }
-
-
-    void Start()
+    public void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
 
-        groundCheck = transform.Find("GroundCheck").transform;
-        wallCheck = transform.Find("WallCheck").transform;
+        groundTransform = transform.Find("GroundCheck").transform;
+        wallTransform = transform.Find("WallCheck").transform;
         abilityActivatorScript = GetComponent<PlayerAbilityActivator>();
 
         groundLayer = LayerMask.GetMask("Ground");
         wallLayer = LayerMask.GetMask("Wall");
         movingPlatformLayer = LayerMask.GetMask("Moving Platform");
-
     }
     #endregion
 
@@ -126,7 +106,6 @@ public class PlayerJump : MonoBehaviour
             }
         }
         
-
         #endregion
 
         if (useWallJumps)
@@ -145,10 +124,21 @@ public class PlayerJump : MonoBehaviour
         }
     }
 
-    #region Jump Methods
-    void PressJump(InputAction.CallbackContext ctx)
+    void OnJump(InputValue input)
     {
+        if (input.isPressed)
+        {
+            PressJump();
+        }
+        else
+        {
+            ReleasedJump();
+        }
+    }
 
+    #region Jump Methods
+    void PressJump()
+    {
         jumpBufferCounter = jumpBufferTime;
 
         if (jumpCount <= maxAirJumpsModifier && !WallCheck())
@@ -166,7 +156,7 @@ public class PlayerJump : MonoBehaviour
     }
 
 
-    void ReleasedJump(InputAction.CallbackContext ctx)
+    void ReleasedJump()
     {
         if (rb.linearVelocity.y > 0f)
         {
@@ -224,12 +214,12 @@ public class PlayerJump : MonoBehaviour
     #region Checks
     bool GroundCheck()
     {
-        return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, wallLayer) || Physics2D.OverlapCircle(groundCheck.position, 0.2f, movingPlatformLayer);
+        return Physics2D.OverlapCircle(groundTransform.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundTransform.position, 0.2f, wallLayer) || Physics2D.OverlapCircle(groundTransform.position, 0.2f, movingPlatformLayer);
     }
 
     bool WallCheck()
     {
-        return Physics2D.OverlapCircle(wallCheck.position, 0.4f, wallLayer);
+        return Physics2D.OverlapCircle(wallTransform.position, 0.4f, wallLayer);
     }
     #endregion
     

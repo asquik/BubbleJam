@@ -6,7 +6,8 @@ using UnityEngine.InputSystem;
 public class PlayerAbilityActivator : MonoBehaviour
 {
         private Rigidbody2D rb;
-        PlayerInput input;
+        
+        private PlayerActionInput input;
         
         private PowerUpScriptableObject powerUp;
         
@@ -17,11 +18,33 @@ public class PlayerAbilityActivator : MonoBehaviour
         
         private PlayerJump playerJumpScript;
 
+        public bool IsEnabled
+        {
+                get => input.asset.enabled;
+                set
+                {
+                        // A naughty approach
+                        // to stopping an error.
+                        //
+                        // Will have to be fixed eventually
+                        if (input == null)
+                        {
+                                return;
+                        }
+                        
+                        if (value) input.Enable();
+                        else input.Disable();
+                }
+        }
+        
         public void Awake()
         {
-                input = new PlayerInput();
                 rb = GetComponent<Rigidbody2D>();
                 playerJumpScript = GetComponent<PlayerJump>();
+                
+                // Not the "correct" way of getting an instance
+                // of this, but I'm short on time in the game jam
+                input = new PlayerActionInput();
 
                 statuses = new Dictionary<string, bool>();
         }
@@ -61,7 +84,7 @@ public class PlayerAbilityActivator : MonoBehaviour
                                 playerJumpScript.ResetModifiers();
                                 break;
                 }
-
+                
                 switch (newPowerUp)
                 {
                         case ActionPowerUpScriptableObject actionPowerUp:
