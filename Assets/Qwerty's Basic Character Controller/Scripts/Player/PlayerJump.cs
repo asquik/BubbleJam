@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.Serialization;
 
 public class PlayerJump : MonoBehaviour
 {
@@ -17,7 +16,7 @@ public class PlayerJump : MonoBehaviour
     [Header("-----Wall Jump/Wall Slide-----")]
     [SerializeField] bool useWallJumps;
     [SerializeField] bool useWallSlide;
-    [SerializeField] float wallSlideSpeed;
+    [SerializeField] float wallSlideSpeed; // Normal: 0.2f, No sliding: -0.6f (I suspect the negative value is to counteract the gravity multiplier)
     [SerializeField] private float wallJumpBufferTime = 0.2f;
     [SerializeField] private Vector2 wallJumpSpeed;
 
@@ -34,9 +33,8 @@ public class PlayerJump : MonoBehaviour
     #endregion
 
     #region Other Variables
-    private LayerMask groundLayer;
-    private LayerMask wallLayer;
-    private LayerMask movingPlatformLayer;
+    private int groundLayerMask;
+    private int wallLayerMask;
     private Transform groundTransform;
     private Transform wallTransform;
     private Rigidbody2D rb;
@@ -58,9 +56,12 @@ public class PlayerJump : MonoBehaviour
         wallTransform = transform.Find("WallCheck").transform;
         abilityActivatorScript = GetComponent<PlayerAbilityActivator>();
 
-        groundLayer = LayerMask.GetMask("Ground");
-        wallLayer = LayerMask.GetMask("Wall");
-        movingPlatformLayer = LayerMask.GetMask("Moving Platform");
+        // Defining the layer masks for jumping & wall jumping mechanics
+        var groundMask = 1 << LayerMask.NameToLayer("Ground");
+        var wallMask = 1 << LayerMask.NameToLayer("Wall");
+        var movingPlatformMask = 1 << LayerMask.NameToLayer("Moving Platform");
+        groundLayerMask = groundMask + wallMask + movingPlatformMask;
+        wallLayerMask = wallMask;
     }
     #endregion
 
@@ -70,21 +71,21 @@ public class PlayerJump : MonoBehaviour
         #region Jump
         jumpBufferCounter -= Time.deltaTime;
 
-        var groundCheck = GroundCheck();
-        var wallCheck = WallCheck() && useWallJumps;
+        var grounded = IsGrounded;
+        var attachedToWall = IsAttachedToWall && useWallJumps;
 
-        if ((groundCheck || wallCheck)  && !wasPreviouslyGrounded)
+        if ((grounded || attachedToWall)  && !wasPreviouslyGrounded)
         {
             jumpCount = 0;
         }
 
-        wasPreviouslyGrounded = (groundCheck || wallCheck);
+        wasPreviouslyGrounded = (grounded || attachedToWall);
 
-        if (groundCheck)
+        if (grounded)
         {
             coyoteCounter = coyoteTime;
         }
-        else 
+        else if (coyoteCounter > 0f)
         {
             coyoteCounter -= Time.deltaTime;
         }
@@ -118,6 +119,8 @@ public class PlayerJump : MonoBehaviour
 
     void FixedUpdate()
     {
+        // CoyoteTime doesn't work as intended (It doesn't prevent 
+        // jumping after being airborne for the specified amount of time)
         if (coyoteCounter > 0f && jumpBufferCounter > 0f)
         {
             ExecuteJump();
@@ -141,9 +144,8 @@ public class PlayerJump : MonoBehaviour
     {
         jumpBufferCounter = jumpBufferTime;
 
-        if (jumpCount <= maxAirJumpsModifier && !WallCheck())
+        if (jumpCount <= maxAirJumpsModifier && !IsAttachedToWall)
         {
-
             ExecuteJump();
         }
 
@@ -185,7 +187,7 @@ public class PlayerJump : MonoBehaviour
     void WallSlide()
     {
 
-        if (WallCheck() && !GroundCheck() && useWallSlide)
+        if (IsAttachedToWall && !IsGrounded && useWallSlide)
         {
             isWallSliding = true;
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -wallSlideSpeed, float.MaxValue));
@@ -212,15 +214,10 @@ public class PlayerJump : MonoBehaviour
     #endregion
 
     #region Checks
-    bool GroundCheck()
-    {
-        return Physics2D.OverlapCircle(groundTransform.position, 0.2f, groundLayer) || Physics2D.OverlapCircle(groundTransform.position, 0.2f, wallLayer) || Physics2D.OverlapCircle(groundTransform.position, 0.2f, movingPlatformLayer);
-    }
 
-    bool WallCheck()
-    {
-        return Physics2D.OverlapCircle(wallTransform.position, 0.4f, wallLayer);
-    }
+    public bool IsGrounded => Physics2D.OverlapCircle(groundTransform.position, 0.2f, groundLayerMask);
+
+    private bool IsAttachedToWall => Physics2D.OverlapCircle(wallTransform.position, 0.4f, wallLayerMask);
     #endregion
     
     #region Modifiers
