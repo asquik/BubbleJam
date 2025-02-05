@@ -7,9 +7,12 @@ public class PlayerController : MonoBehaviour
     
     [Header("-----Game Object References-----")]
     private PlayerInput input;
-    // private PlayerHorizontalMovement horizontalMovementScript;
     private PlayerJump jumpScript;
     private PlayerAbilityActivator abilityActivatorScript;
+
+    // This being an indirect getter is probably a bad practice though I'm using
+    // it anyway to get around a more significant refactor of the scripts.
+    public bool IsGrounded => jumpScript && jumpScript.IsGrounded;
     
     public bool IsEnabled
     {
@@ -25,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
+        jumpScript = GetComponent<PlayerJump>();
         abilityActivatorScript = GetComponent<PlayerAbilityActivator>();
     }
     

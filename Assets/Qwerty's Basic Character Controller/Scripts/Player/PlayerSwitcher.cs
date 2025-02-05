@@ -61,12 +61,16 @@ public class PlayerSwitcher : MonoBehaviour
     {
         if (player1Controls.IsEnabled)
         {
+            if (!player1Controls.IsGrounded) return;
+            
             setPlayerEnabled(player1Controls, false);
             setPlayerEnabled(player2Controls, true);
             cameraScript.player = player2Controls.gameObject;
         }
         else
         {
+            if (!player2Controls.IsGrounded) return;
+            
             setPlayerEnabled(player1Controls, true);
             setPlayerEnabled(player2Controls, false);
             cameraScript.player = player1Controls.gameObject;
